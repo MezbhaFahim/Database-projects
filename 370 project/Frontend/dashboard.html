@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard Page</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <section class="dashboard-section">
+        <h1>Dashboard</h1>
+
+        <!-- Input Box for Name, Biography, List of Books, Social Media -->
+        <div class="input-box">
+            <input type="text" placeholder="Name">
+            <textarea placeholder="Biography"></textarea>
+            <input type="text" placeholder="List of Books">
+            <input type="text" placeholder="Social Media">
+            <!-- Done Button for Inputs -->
+            <button class="done-btn">Done</button>
+        </div>
+
+        <!-- Search Bar -->
+        <input type="text" class="search-bar" placeholder="Search">
+        <!-- Done Button for Search -->
+        <button class="search-done-btn">Done</button>
+
+        <!-- Data Table -->
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Biography</th>
+                    <th>List of Books</th>
+                    <th>Social Media</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Table rows will be populated dynamically -->
+                <tr>
+                    <td>John Doe</td>
+                    <td>Author</td>
+                    <td>Book 1, Book 2</td>
+                    <td>@johndoe</td>
+                    <td><button class="delete-btn">❌</button></td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>
