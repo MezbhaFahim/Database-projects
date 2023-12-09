@@ -21,14 +21,29 @@ require_once('dbconnect.php');
 
         .container {
             text-align: center;
+            position: relative;
+        }
+
+        /* New styles for the logout button */
+        .logout-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <a href="logout.php" class="logout-button">Logout</a>
         <div class="welcome-section">
             <h1>Welcome</h1>
-            <p>Name</p>
+            <p>Admin</p>
         </div>
         <div class="buttons">
             <a href="dashboard.php" class="transparent-btn">Edit Dashboard</a>
