@@ -42,7 +42,12 @@ if (isset($_POST['delete'])) {
 
 // Fetch all books from the database
 $fetch_query = "SELECT * FROM books";
-$result_books = mysqli_query($conn, $fetch_query);
+if (isset($result_search)) {
+    $result_books = $result_search; // Use search results if available
+} else {
+    $fetch_query_limit = "SELECT * FROM books LIMIT 10"; // Query to fetch 10 rows
+    $result_books = mysqli_query($conn, $fetch_query_limit); // Fetch 10 rows if no search
+}
 ?>
 
 <!DOCTYPE html>
