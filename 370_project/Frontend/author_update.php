@@ -24,7 +24,8 @@
         }
 
         body {
-            background-image: url('picture.jpg');
+            background-image: url(https://wallpaperaccess.com/full/2222765.jpg);
+            
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -48,7 +49,7 @@
 <body>
     <?php
     // Include the database connection file
-    require_once('dbconnect.php');
+    require_once('DBconnect.php');
 
     // Check if the form is submitted
     if ($_SERVER["REQUEST_METHOD"] == "POST") {

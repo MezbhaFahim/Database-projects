@@ -1,46 +1,45 @@
 
-
 <?php
 session_start();
 require_once('DBconnect.php');
 
-//http://localhost/HEIWA/admin_login.php
+//http://localhost:8080/CSE370_PROJECT/admin_login.php
 
-
+// to check if the input are not empty
 if(isset($_POST['email']) && isset($_POST['password'])){
     echo "LET HIM ENTER";
-	// to check username and password exist
+	//to check  username and password exists
 	$e = $_POST['email'];
 	$p = $_POST['password'];
-	$sql = "SELECT * FROM admin_panel WHERE admin_email = '$e' AND admin_password = '$p'";
+	$sql = "SELECT * FROM reader WHERE reader_email = '$e' AND reader_password = '$p'";
 	
 	//Execute the query 
 	$result = mysqli_query($conn, $sql);
-	
+	//$row = mysqli_fetch_array($result,MYSQL_ASSOC);
+	//check if it returns an empty set
 	if(mysqli_num_rows($result) !=0 ){
         if (!isset($_SESSION['email'])) {
-            // Redirect to the login 
+            // Redirect 
             
-            header("Location: admin_login.php");
+            header("Location: reader_login.php");
         }
         
-        // Retrieve user information
+        // Retrieve information
         $email = $_SESSION['email'];
         
 	
 		//echo "LET HIM ENTER";
-		header("Location: admin_after_login.php");
+		header("Location: reader_profile1.php");
 	}
 	else{
 		//echo "Username or Password is wrong";
-		header("Location: admin_login.php");
+		header("Location: reader_login.php");
 	}
 	
 }
 
 
 ?>
-
 
 
 
@@ -199,8 +198,8 @@ button:hover {
 
     <body>
     <section>
-        <form action="admin_login.php" method="post">
-            <h1>Admin Login</h1>
+        <form action="reader_login.php" method="post">
+            <h1>Reader Login</h1>
             <div class="inputbox">
                 <ion-icon name="email"></ion-icon>
                 <input type="email" name="email" required>
@@ -212,6 +211,9 @@ button:hover {
                 <label>Password</label>
             </div>
             <button type="submit">Log in</button>
+            <div class="register">
+              <p>Create new account <a href="http://localhost/HEIWA/reader_signup.php">Sign Up</a></p>
+          </div>
         </form>
     </section>
 </body>

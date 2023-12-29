@@ -66,7 +66,102 @@ if (isset($_POST['delete_author'])) {
 <head>
     <meta charset="UTF-8">
     <title>Dashboard Page</title>
-    <link rel="stylesheet" href="dashboard.css">
+    <style>
+        /* Add your CSS styles here */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url(https://wallpaperaccess.com/full/2222765.jpg);
+    background-size: cover;
+    background-position: center;
+    min-height: 100vh;
+}
+
+.dashboard-section {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.5); /* Adjust opacity here */
+    border: 1px solid #ddd;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    backdrop-filter: blur(10px); /* Glass-like effect */
+    border-radius: 20px;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    color: black;
+    font-size: 3rem; /* Larger size for "Dashboard" */
+    margin-bottom: 20px;
+}
+
+.input-box {
+    margin-bottom: 20px;
+}
+
+.input-box input,
+.input-box textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.done-btn {
+    display: inline-block;
+    padding: 5px 15px; /* Smaller button */
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 20px;
+}
+
+.search-bar {
+    width: 50%;
+    padding: 10px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    font-family: 'Poppins', sans-serif;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 50px;
+}
+
+.data-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    color: white;
+    background-color: #007bff; /* Blue color for table header */
+    font-family: 'Poppins', sans-serif;
+}
+
+.data-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    color: black; /* Black font color for table body */
+    font-family: 'Poppins', sans-serif;
+}
+
+.delete-btn {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    font-family: 'Poppins', sans-serif;
+}
+
+    </style>
 </head>
 
 <body>
@@ -126,8 +221,8 @@ if (isset($_POST['delete_author'])) {
                     <tr>
                         <td><?php echo $row['name']; ?></td>
                         <td><?php echo $row['biography']; ?></td>
-                        <td><?php echo $row['list_of_books']; ?></td>
-                        <td><?php echo $row['list_of_social_media']; ?></td>
+                        <td><?php echo $row['lists_of_books']; ?></td>
+                        <td><?php echo $row['social_media']; ?></td>
                         <td>
                             <form method="POST" action="">
                                 <input type="hidden" name="delete_author_name" value="<?php echo $row['name']; ?>">

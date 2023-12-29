@@ -1,54 +1,42 @@
-
-
 <?php
 session_start();
 require_once('DBconnect.php');
 
-//http://localhost/HEIWA/admin_login.php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+   
+    $name = $_POST["reader_name"];
+    $email = $_POST["reader_email"];
+    $password = $_POST["reader_password"];
+    $confirmPassword = $_POST["confirmPassword"];
 
+    if ($password !== $confirmPassword) {
+        $error_message = "Error: Password and Confirm Password do not match.";
+    } else {
+        $email_query = "SELECT * FROM author_dashboard WHERE email = '$email'";
+        $email_result = $conn->query($email_query);
 
-if(isset($_POST['email']) && isset($_POST['password'])){
-    echo "LET HIM ENTER";
-	// to check username and password exist
-	$e = $_POST['email'];
-	$p = $_POST['password'];
-	$sql = "SELECT * FROM admin_panel WHERE admin_email = '$e' AND admin_password = '$p'";
-	
-	//Execute the query 
-	$result = mysqli_query($conn, $sql);
-	
-	if(mysqli_num_rows($result) !=0 ){
-        if (!isset($_SESSION['email'])) {
-            // Redirect to the login 
-            
-            header("Location: admin_login.php");
+        if ($email_result->num_rows > 0) {
+            $error_message = "Error: Email already exists. Please use a different one.";
+        } else {
+            $insert_author_sql = "INSERT INTO author_dashboard (name, email, password) 
+                                  VALUES ('$name', '$email', '$password')";
+            if ($conn->query($insert_author_sql) === TRUE) {
+                // Redirect 
+                header("Location: author_dashboard.php");
+                exit();
+            } else {
+                $error_message = "Error inserting user info: " . $conn->error;
+            }
         }
-        
-        // Retrieve user information
-        $email = $_SESSION['email'];
-        
-	
-		//echo "LET HIM ENTER";
-		header("Location: admin_after_login.php");
-	}
-	else{
-		//echo "Username or Password is wrong";
-		header("Location: admin_login.php");
-	}
-	
+    }
+    $conn->close();
 }
-
-
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Virtual Library Login</title>
-        
+        <title>Welcome</title>
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 
@@ -195,24 +183,52 @@ button:hover {
 }
         </style>
         
+       
     </head>
 
     <body>
-    <section>
-        <form action="admin_login.php" method="post">
-            <h1>Admin Login</h1>
-            <div class="inputbox">
-                <ion-icon name="email"></ion-icon>
-                <input type="email" name="email" required>
-                <label>Email</label>
-            </div>
-            <div class="inputbox">
-                <ion-icon name="password"></ion-icon>
-                <input type="password" name="password" required>
-                <label>Password</label>
-            </div>
-            <button type="submit">Log in</button>
-        </form>
-    </section>
-</body>
+<section>
+    <form method="post" action="author_signup.php">
+        <h1>Author Sign Up</h1>
+
+        
+        <?php
+                // Display error message if set
+                if (isset($error_message)) {
+                    echo '<div style="color: red;">' . $error_message . '</div>';
+                }
+                ?>
+
+                <div class="inputbox">
+                    <ion-icon name="mail-outline"></ion-icon>
+                    <input type="text" name="reader_name" required>
+                    <label for="">Name</label>
+                </div>
+
+                <div class="inputbox">
+                    <ion-icon name="mail-outline"></ion-icon>
+                    <input type="email" name="reader_email" required>
+                    <label for="">Email</label>
+                </div>
+
+                <div class="inputbox">
+                    <ion-icon name="lock-closed-outline"></ion-icon>
+                    <input type="password" name="reader_password" required>
+                    <label for="">Password</label>
+                </div>
+
+                <div class="inputbox">
+                    <ion-icon name="lock-closed-outline"></ion-icon>
+                    <input type="password" name="confirmPassword" required>
+                    <label for="">Confirm Password</label>
+                </div>
+
+                <button type="submit">Sign Up</button>
+
+                <div class="register">
+                    <p>Already have an Account? <a href="http://localhost/HEIWA/author_login.php">Log In</a></p>
+                </div>
+            </form>
+        </section>
+    </body>
 </html>
